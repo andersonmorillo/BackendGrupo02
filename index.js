@@ -13,6 +13,14 @@ app.use(cors());
 //Database
 dbConnection();
 
+
+//Lectura y parseo del body
+app.use(express.json());
+
+//Rutas
+app.use('/api/usuarios', require('./routes/Usuarios'));
+app.use('/api/login', require('./routes/Auth'));
+
 //Rutas
 app.get('/', (req,res) => {
     res.status(200).json({
