@@ -9,6 +9,8 @@ const app = express();
 //Configurar CORS
 app.use(cors());
 
+//Carpeta pública
+app.use(express.static('public'));
 
 //Database
 dbConnection();
