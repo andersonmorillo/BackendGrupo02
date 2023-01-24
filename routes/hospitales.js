@@ -13,7 +13,11 @@ router.post('/',[
     validarCampos
 ],crearHospital);
 
-router.put('/:id',[], ActualizarHospital);
+router.put('/:id',[
+    validarJwt,
+    check('nombre','El nombre es obligatorio').not().isEmpty(),
+    validarCampos
+], ActualizarHospital);
 
 router.delete('/:id',validarJwt,BorrarHospital);
 

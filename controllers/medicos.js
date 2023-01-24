@@ -1,4 +1,5 @@
 const { response } = require("express");
+const Hospital = require("../models/Hospital");
 const Medico = require("../models/Medico");
 
 const getMedicos = async (req,res = response) => {
@@ -30,21 +31,66 @@ const crearMedico = async (req,res = response) => {
     }
 }
 
-const ActualizarMedico = (req,res = response) => {
-    res.json({
-        ok:true,
-        msg:'Actualizado'
-    });
+const ActualizarMedico = async (req,res = response) => {
+    const idHospital = req.body.hospital;
+    const idMedico = req.params.id;
+    const uid = req.uid;
+    try {
+        const medicoDb = await Medico.findById(idMedico);
+        const hospitalDb = await Hospital.findById(idHospital);
+        if(!medicoDb){
+            return res.status(404).json({
+                ok:false,
+                msg:'No hay ningún medico con ese ID'
+            });
+        }
+        if(!hospitalDb){
+            return res.status(404).json({
+                ok:false,
+                msg:'No hay ningún Hospital con ese ID'
+            });
+        }
+        const info = {
+            ...req.body,
+            user:uid
+        }
+        const medicoActualizado = await Medico.findByIdAndUpdate(idMedico,info,{new:true});
+        res.json({
+            ok:true,
+            medicoActualizado
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Ocurrió un error. Hable con el admin'
+        });
+    }
 }
 
-const BorrarMedico = (req,res = response) => {
-    res.json({
-        ok:true,
-        msg:'Borrado'
-    });
+const BorrarMedico = async (req,res = response) => {
+    const idMedico = req.params.id;
+    try {
+        const medicoDb = await Medico.findById(idMedico);
+        if(!medicoDb){
+            return res.status(404).json({
+                ok:false,
+                msg:'No hay ningún medico con ese ID'
+            });
+        }
+        await Medico.findByIdAndDelete(idMedico);
+        res.json({
+            ok:true,
+            msg:'Medico borrado'
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Ocurrió un error. Hable con el admin'
+        });
+    }
 }
-
-
 
 
 module.exports = {getMedicos,crearMedico,ActualizarMedico,BorrarMedico};

@@ -41,7 +41,7 @@ const fileUpload = (req,res = response) => {
     const file = req.files.imagen;
     file.mv(path,(error)=>{
         if(error){
-            res.status(500).json({
+            return res.status(500).json({
                 ok:false,
                 msg:'Error al mover la imagen'
             })
@@ -49,12 +49,12 @@ const fileUpload = (req,res = response) => {
 
         //Actualizar base de datos
         if(!actualizarImg(tipo,id,nombreArchivo)){
-            res.status(500).json({
+            return res.status(500).json({
                 ok:false,
                 msg:'No se encontró ID'
             });
         }else{
-            res.json({
+            return res.json({
                 ok:true,
                 msg:'Archivo subido',
                 nombreArchivo
