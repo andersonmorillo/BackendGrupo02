@@ -55,6 +55,9 @@ const googleSignin = async (req,res = response) => {
         }else{
             usuarioNew = usuarioDb;
             usuarioNew.google = true;
+            if(!usuarioNew.img){
+                usuarioNew.img = picture;
+            }
         }
         //Guardar usuario
         await usuarioNew.save();
@@ -79,11 +82,13 @@ const googleSignin = async (req,res = response) => {
 
 const renewToken = async (req,res = response) => {
     const uid = req.uid;
+    const user = await Usuario.findById(uid);
     const token = await generarJwt(uid);
     res.json({
         ok:true,
-        msg:'mada'
-    })
+        token,
+        user
+    });
 }
 
 module.exports = {

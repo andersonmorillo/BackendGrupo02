@@ -79,7 +79,9 @@ const actualizarUsuario = async (req,res = response) => {
                 });
             }
         }
-        campos.email = email;
+        if(!usuarioDb.google){
+            campos.email = email;
+        }
         const usuarioActualizado = await Usuario.findByIdAndUpdate(uid,campos,{new:true});
         res.json({
             ok:true,
