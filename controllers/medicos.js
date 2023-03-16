@@ -1,6 +1,7 @@
 const { response } = require("express");
 const Hospital = require("../models/Hospital");
 const Medico = require("../models/Medico");
+const mongoose = require("mongoose")
 
 const getMedicos = async (req,res = response) => {
     const medicos = await Medico.find().populate('user','nombre').populate('hospital','nombre');
@@ -92,5 +93,26 @@ const BorrarMedico = async (req,res = response) => {
     }
 }
 
+const medicoById = async (req,res = Response) => {
+    const id = req.params.id;
 
-module.exports = {getMedicos,crearMedico,ActualizarMedico,BorrarMedico};
+    try {
+        if( !mongoose.Types.ObjectId.isValid(id) ) return false;
+        const medico = await Medico.findById(id).populate('user','nombre').populate('hospital','nombre');
+        res.json({
+            ok:true,
+            medico
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Hable con el administrador'
+        })
+    }
+
+
+}
+
+
+module.exports = {getMedicos,crearMedico,ActualizarMedico,BorrarMedico,medicoById};

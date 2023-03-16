@@ -14,9 +14,9 @@ const actualizarImg = async (tipo,id,nombreArchivo) => {
     const model =
       tipo === "usuarios"
         ? Usuario
-        : type === "medicos"
+        : tipo === "medicos"
         ? Medico
-        : type === "hospitales"
+        : tipo === "hospitales"
         ? Hospital
         : null;
 
