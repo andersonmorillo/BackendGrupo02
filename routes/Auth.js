@@ -3,7 +3,7 @@ const { login,googleSignin, renewToken } = require('../controllers/Auth');
 const { check } = require('express-validator');
 
 const validarCampos = require('../middlewares/validar-campos');
-const validarJwt = require('../middlewares/validar-jwt');
+const {validarJwt} = require('../middlewares/validar-jwt');
 
 const router = Router();
 

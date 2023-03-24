@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { getHospitales, crearHospital, ActualizarHospital, BorrarHospital } = require('../controllers/hospitales');
 const validarCampos = require('../middlewares/validar-campos');
-const validarJwt = require('../middlewares/validar-jwt');
+const {validarJwt} = require('../middlewares/validar-jwt');
 const router = Router();
 
 router.get('/',getHospitales);

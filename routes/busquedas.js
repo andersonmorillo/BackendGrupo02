@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const { getTodo, getDocumentosColeccion } = require('../controllers/busquedas');
-const validarJwt = require('../middlewares/validar-jwt');
+const {validarJwt} = require('../middlewares/validar-jwt');
 
 const router = Router();
 
