@@ -15,6 +15,8 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: '=2.90.0'
+      - name: Check Terraform version
+        run: terraform version
       - name: Terraform Init
         run: terraform init -upgrade
         env:
