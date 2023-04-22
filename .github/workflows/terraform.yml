@@ -17,6 +17,8 @@ jobs:
           terraform_version: '=2.90.0'
       - name: Terraform Init
         run: terraform init -upgrade
+        env:
+          ARM_PROVIDER_VERSION: "=3.6.0"
       - name: Terraform Plan
         run: terraform plan
       - name: Terraform Apply
