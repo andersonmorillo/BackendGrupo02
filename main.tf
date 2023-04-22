@@ -2,7 +2,7 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_app_service_plan" "example" {
+resource "azurerm_app_service_plan" "plan" {
   name                = "example-appserviceplan"
   location            = "East US"
   resource_group_name = "Grupo-02"
