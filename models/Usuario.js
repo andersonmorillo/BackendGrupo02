@@ -27,6 +27,10 @@ const UsuarioSchema = Schema({
         type:Boolean,
         default:false
     },
+    citas: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Cita'
+    }],
 });
 
 UsuarioSchema.method('toJSON',function(){

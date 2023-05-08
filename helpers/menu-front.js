@@ -1,29 +1,27 @@
 const getMenuFront = (role = "USER_ROLE") => {
   const menu = [
     {
-      title: "Dashboard",
+      title: "Menú principal",
       icon: "mdi mdi-gauge",
       submenu: [
-        { title: "Main", url: "/" },
-        { title: "ProgressBar", url: "progress" },
-        { title: "Graficas", url: "grafica1" },
-        { title: "Promesas", url: "promesas" },
-        { title: "Rxjs", url: "rxjs" },
+        { title: "Ver citas", url: "/dashboard/citas" },
+        { title: "Tomar una cita", url: "/dashboard/new-cita" },
+        { title: "Cancelar una cita", url: "/dashboard/citas" },
+        { title: "Ver listado de hospitales", url: "/dashboard/hospitales" },
+        { title: "Ver listado de médicos", url: "/dashboard/medicos" },
       ],
     },
     {
-      title: "Mantenimiento",
-      icon: "mdi mdi-folder-lock-open",
-      submenu: [
-        // { title: 'Usuarios',url: 'usuarios' },
-        { title: "Hospitales", url: "hospitales" },
-        { title: "Medicos", url: "medicos" },
-      ],
-    },
+      title: "",
+      icon: "",
+      submenu:[]
+    }
   ];
 
   if (role === "ADMIN_ROLE") {
-    menu[1].submenu.unshift({ title: "Usuarios", url: "usuarios" });
+    menu[1].title = "Mantenimiento"
+    menu[1].icon = "mdi mdi-folder-lock-open"
+    menu[1].submenu = [{ title: "Usuarios", url: "usuarios" },{ title: "Hospitales", url: "hospitales" },{ title: "Medicos", url: "Medicos" }]
   }
   return menu;
 };

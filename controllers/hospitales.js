@@ -1,5 +1,6 @@
 const { response } = require("express");
 const Hospital = require("../models/Hospital");
+const mongoose = require("mongoose")
 
 
 
@@ -86,7 +87,23 @@ const BorrarHospital = async (req,res = response) => {
     }
 }
 
+const hospitalById = async (req,res = Response) => {
+    const id = req.params.id;
+    try {
+        if( !mongoose.Types.ObjectId.isValid(id) ) return false;
+        const hospital = await Hospital.findById(id);
+        res.json({
+            ok:true,
+            hospital
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Hable con el administrador'
+        })
+    }
+}
 
 
-
-module.exports = {getHospitales,crearHospital,ActualizarHospital,BorrarHospital};
+module.exports = {getHospitales,crearHospital,ActualizarHospital,BorrarHospital,hospitalById};
