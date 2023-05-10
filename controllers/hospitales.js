@@ -1,6 +1,6 @@
 const { response } = require("express");
 const Hospital = require("../models/Hospital");
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 
 

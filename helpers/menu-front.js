@@ -21,7 +21,7 @@ const getMenuFront = (role = "USER_ROLE") => {
   if (role === "ADMIN_ROLE") {
     menu[1].title = "Mantenimiento"
     menu[1].icon = "mdi mdi-folder-lock-open"
-    menu[1].submenu = [{ title: "Usuarios", url: "usuarios" },{ title: "Hospitales", url: "hospitales" },{ title: "Medicos", url: "Medicos" }]
+    menu[1].submenu = [{ title: "Usuarios", url: "usuarios" },{ title: "Hospitales", url: "hospitales" },{ title: "Medicos", url: "medicos" }]
   }
   return menu;
 };
