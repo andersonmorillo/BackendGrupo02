@@ -3,6 +3,7 @@ const express = require('express');
 require('dotenv').config();
 const {dbConnection} = require('./database/config');
 const cors = require('cors');
+const path = require('path');
 
 //Crear el servidor express
 const app = express();
@@ -36,6 +37,10 @@ app.get('/', (req,res) => {
     res.status(200).json({
         ok:true,
     });
+})
+
+app.get('*', (req,res) => {
+    res.sendFile(path.resolve(__dirname,'public/index.html'));
 })
 
 app.listen(app.get('port'),()=>{
