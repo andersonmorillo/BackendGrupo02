@@ -44,7 +44,7 @@ const fileUpload = async (req, res = response) => {
     if (!currentCollection) {
       return false;
     }
-    // Borrar imagen anterior
+    
     if (currentCollection.img !== url) {
         currentCollection.img = url;
         await currentCollection.save();

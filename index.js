@@ -17,6 +17,8 @@ app.use(express.static('public'));
 dbConnection();
 
 
+app.set('port', process.env.PORT || 5000);
+
 //Lectura y parseo del body
 app.use(express.json());
 
@@ -36,6 +38,6 @@ app.get('/', (req,res) => {
     });
 })
 
-app.listen(process.env.PORT,()=>{
-    console.log(`servidor corriendo en el puerto ${process.env.PORT}`);
+app.listen(app.get('port'),()=>{
+    console.log(`servidor corriendo en el puerto ${app.get('port')}`);
 })
