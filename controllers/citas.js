@@ -1,9 +1,10 @@
+const { response } = require('express');
 const Cita = require('../models/Cita');
 const Usuario = require('../models/Usuario');
 
-const getCitas = async (req,res) => {
-    const id = req.uid;
-    const citas = await Usuario.findById(id).populate('citas');
+const getCitas = async (req,res = response) => {
+    const uid = req.params.id;
+    const citas = await Usuario.findById(uid).populate('citas');
     res.json({
         ok:true,
         citas

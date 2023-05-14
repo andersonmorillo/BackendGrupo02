@@ -1,5 +1,5 @@
 const { response } = require("express");
-const { uploadBlob } = require("../database/blobstorage");
+const { uploadBlob } = require("../database/blobStorage");
 const Usuario = require("../models/Usuario");
 const Medico = require("../models/Medico");
 const Hospital = require("../models/Hospital");
