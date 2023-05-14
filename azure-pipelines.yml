@@ -39,8 +39,6 @@ stages: # step 1
       pool:
         vmImage: ubuntu-latest
         #name: Default
-      variables: # vars from azure devOps in library
-      - group: actividad1corte3
       steps:
         - script: |
             set -e 
