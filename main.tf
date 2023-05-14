@@ -1,4 +1,9 @@
 terraform {
+  backend "s3" {
+    bucket = "backendgrupo02"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+  }
   required_providers {
     docker = {
       source    = "kreuzwerker/docker"
@@ -40,15 +45,15 @@ resource "aws_ecr_repository" "my_ecr_repo" {
 }
 
 resource "aws_ecs_cluster" "my_cluster" {
-  name = "my-cluster${var.imagebuild}" # Naming the cluster
+  name = "backend${var.imagebuild}" # Naming the cluster
 }
 
 resource "aws_ecs_task_definition" "my_first_task" {
-  family                   = "ACTVIDAD1${var.imagebuild}" # Naming our first task
+  family                   = "Backend${var.imagebuild}" # Naming our first task
   container_definitions    = <<DEFINITION
   [
     {
-      "name": "ACTVIDAD1${var.imagebuild}",
+      "name": "Backend${var.imagebuild}",
       "image": "ivanzapata2126/backend:${var.imagebuild}",
       "essential": true,
       "portMappings": [
