@@ -21,6 +21,6 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: 'backend'
+        app-name: 'backendServer'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         images: 'backendnodejs.azurecr.io/backend:${{ github.sha }}'
