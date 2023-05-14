@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   AZURE_WEBAPP_NAME: Gestiondehospital   
