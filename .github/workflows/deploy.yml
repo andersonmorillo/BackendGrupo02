@@ -11,16 +11,16 @@ jobs:
 
     - uses: azure/docker-login@v1
       with:
-        login-server: mycontainer.azurecr.io
+        login-server: backendnodejs.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - run: |
-        docker build . -t mycontainer.azurecr.io/backend:${{ github.sha }}
-        docker push mycontainer.azurecr.io/backend:${{ github.sha }}     
+        docker build . -t backendnodejs.azurecr.io/backend:${{ github.sha }}
+        docker push backendnodejs.azurecr.io/backend:${{ github.sha }}     
 
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'backend'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: 'mycontainer.azurecr.io/backend:${{ github.sha }}'
+        images: 'backendnodejs.azurecr.io/backend:${{ github.sha }}'
