@@ -59,7 +59,7 @@ resource "aws_ecs_task_definition" "my_first_task" {
           "protocol": "tcp"
         }
       ],
-      "memory": 512,
+      "memory": 2048,
       "cpu": 256
     }
   ]
