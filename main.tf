@@ -40,20 +40,16 @@ resource "aws_default_subnet" "default_subnet_b" {
   availability_zone = "us-east-1b"
 }
 
-resource "aws_ecr_repository" "my_ecr_repo" {
-  name = "actividad1corte3${var.imagebuild}"
-}
-
 resource "aws_ecs_cluster" "my_cluster" {
-  name = "backend${var.imagebuild}" # Naming the cluster
+  name = "backendGrupo02" # Naming the cluster
 }
 
 resource "aws_ecs_task_definition" "my_first_task" {
-  family                   = "Backend${var.imagebuild}" # Naming our first task
+  family                   = "backendGrupo02" # Naming our first task
   container_definitions    = <<DEFINITION
   [
     {
-      "name": "Backend${var.imagebuild}",
+      "name": "backendGrupo02",
       "image": "ivanzapata2126/backend:${var.imagebuild}",
       "essential": true,
       "portMappings": [
@@ -76,7 +72,7 @@ resource "aws_ecs_task_definition" "my_first_task" {
 }
 
 resource "aws_iam_role" "ecsTaskExecutionRole" {
-  name               = "ecsTaskExecutionRole${var.imagebuild}"
+  name               = "ecsTaskExecutionRole"
   assume_role_policy = "${data.aws_iam_policy_document.assume_role_policy.json}"
 }
 
@@ -97,7 +93,7 @@ resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
 }
 
 resource "aws_alb" "application_load_balancer" {
-  name               = "load-balancer-dev${var.imagebuild}" # Naming our load balancer
+  name               = "load-balancer-backendGrupo02" # Naming our load balancer
   load_balancer_type = "application"
   subnets = [ # Referencing the default subnets
     "${aws_default_subnet.default_subnet_a.id}",
@@ -125,7 +121,7 @@ resource "aws_security_group" "load_balancer_security_group" {
 }
 
 resource "aws_lb_target_group" "target_group" {
-  name        = "target-group${var.imagebuild}"
+  name        = "target-group-backendGrupo02"
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
@@ -143,7 +139,7 @@ resource "aws_lb_listener" "listener" {
 }
 
 resource "aws_ecs_service" "my_first_service" {
-  name     =  "actividad1corte3${var.imagebuild}"                           # Naming our first service
+  name     =  "backendGrupo02"                           # Naming our first service
   cluster         = "${aws_ecs_cluster.my_cluster.id}"             # Referencing our created Cluster
   task_definition = "${aws_ecs_task_definition.my_first_task.arn}" # Referencing the task our service will spin up
   launch_type     = "FARGATE"
